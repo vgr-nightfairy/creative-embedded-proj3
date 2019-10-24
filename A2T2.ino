@@ -2,8 +2,8 @@
 #include <WebServer.h>
 #include <WiFiUdp.h>
 
-const char* ssid = "VGR";
-const char* password = "noodles";
+const char* ssid = "VR_Wifi";
+const char* password = "123456789";
 char *valueString;
 
 IPAddress local_ip(192,168,1,1);
@@ -22,21 +22,22 @@ const int Switch = 5;
 
 const int Sensor = 34;
 //const int Yaxis = 35;
-float SensorVal = 0;
+
 
 int curr = 0;
 int prev = 0;
 
 int ButtonRead = 0;
-int XRead = 0;
-int YRead = 0;
+float SensorRead = 0;
+//int XRead = 0;
+//int YRead = 0;
 int SwitchRead = 0;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(9600);
   WiFi.softAP(ssid, password);
-  WiFi.softAPConfig(local_up, gateway, subnet);
+  WiFi.softAPConfig(local_ip, gateway, subnet);
   
   for (int i = 0; i < 16; i ++) {
     pinMode(ledPin[i], OUTPUT);
@@ -44,8 +45,8 @@ void setup() {
   
   pinMode(Button, INPUT_PULLUP);
   pinMode(Switch, INPUT);
-  pinMode(Xaxis, INPUT);
-  pinMode(Yaxis, INPUT);
+  pinMode(Sensor, INPUT);
+//  pinMode(Yaxis, INPUT);
 
   server.begin();
 
@@ -56,6 +57,8 @@ void loop() {
   ButtonRead = digitalRead(Button);
   SwitchRead = digitalRead(Switch);
   SensorRead = analogRead(Sensor);
+
+  Serial.println(String(SensorRead));
 
   udp.beginPacket("192.168.1.2", 57222);
   udp.print(String(SensorRead));
@@ -91,9 +94,5 @@ void loop() {
     }
     delay(1000);
   }
-   
 
-  Serial.println(String(ButtonRead));
-  Serial.println(String(SensorRead));
-  Serial.println(String(SwitchRead));
 } 
