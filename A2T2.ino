@@ -58,7 +58,7 @@ void loop() {
   SensorRead = analogRead(Sensor);
 
   udp.beginPacket("192.168.1.2", 57222);
-  udp.print(String(pinValue));
+  udp.print(String(SensorRead));
   udp.endPacket();
   delay(100);
 
@@ -94,7 +94,6 @@ void loop() {
    
 
   Serial.println(String(ButtonRead));
-  Serial.println(String(Sensor));
+  Serial.println(String(SensorRead));
   Serial.println(String(SwitchRead));
-
 } 
