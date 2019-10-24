@@ -21,3 +21,7 @@ Although the overall structure of this enclose will be hard to reproduce, as it 
 ## Installation
 
 This device is intended to be installed in a natural environment, preferably in a flower bed, as it is interesting to see how different constructued representations of nature interact with one another and the external world. The one difficulty with this is the fact that any portable power source seems to be inefficient to actually enable a reliable WiFi connection. Therefore other alternatives to power need to be explored for this installation. Maybe an extension cord embedded in the dirt?
+
+## Video Link
+
+https://youtu.be/3T7Rpuq1ckY
