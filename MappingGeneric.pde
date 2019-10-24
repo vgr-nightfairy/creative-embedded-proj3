@@ -9,7 +9,7 @@ int SensorRead = 0;
 PImage img;
 
 void setup() {
-  udp = new UDP(this, PORT, IP);
+  udp = new UDP(this, PORT);
   udp.listen(true);
   
   fullScreen();
@@ -18,18 +18,18 @@ void setup() {
   smooth();
 }
 
-void receive(byte[] data, String PORT, int IP) {
-  String value = new String(data);
-  SensorRead = int(value);
-  println(int(value));
-}
+
 
 void draw() {
+  println(int(SensorRead));
   // Pick a random point
   int x = int(random(img.width));
   int y = int(random(img.height));
-  //int pointillize = SensorRead;
-  int pointillize = 50;
+  int pointillize = 10;
+  if (SensorRead > 0) {
+    pointillize = SensorRead/2;
+  }
+  //int pointillize = 50;
   int loc = x + y*img.width;
   
   // Look up the RGB color in the source image
@@ -43,4 +43,12 @@ void draw() {
   fill(r,g,b,100);
   ellipse(x, y,pointillize,pointillize);
   
+}
+
+void receive(byte[] data) {
+  if (data != null) {
+    println("yes");
+    String value = new String(data);
+    SensorRead = int(value);
+  }
 }
